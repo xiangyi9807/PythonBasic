@@ -42,3 +42,11 @@ list8 = map(abs, list7)
 print(type(list8))
 for i in list8:
     print(i)
+
+# filter方法
+def foo(n):
+    return (n%2) == 0
+list9 = filter(foo, range(10))
+print(type(list9))
+for j in list9:
+    print(j)
