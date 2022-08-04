@@ -29,3 +29,11 @@ print(dict2)
 
 # 排序后返回列表
 print(sorted(dict2.items(), key= lambda item:item[0]))
+
+
+'''判断key是否在字典'''
+
+dict5 = {'name':'vin', 'age':12}
+
+if 'name' in dict5:
+    print('y')
