@@ -13,6 +13,7 @@ class UI(object):
         self.driver.implicitly_wait(30)
 
     def findID(self, ID):
+        '''注意别用小写的id，因为id是python的关键字'''
         return self.driver.find_element_by_id(ID)
 
     def sendKeys(self, ID, keywords):
