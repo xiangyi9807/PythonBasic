@@ -24,7 +24,7 @@ def getNow():
 
 # print(getNow())
 
-def run():
+def runtest():
     filename = getNow()+'-report.html'
     runner = HTMLTestRunner.HTMLTestRunner(
         stream = open(filename, 'wb'),
@@ -35,4 +35,4 @@ def run():
 
 
 if __name__ == '__main__':
-    run()
+    runtest()
