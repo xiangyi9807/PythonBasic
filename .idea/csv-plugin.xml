@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\9. 数据驱动\2.使用CSV文件\sina.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
