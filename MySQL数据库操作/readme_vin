@@ -1,0 +1,157 @@
+目标：
+1.数据库分类
+    1.1 关系型数据库：二维表格模型 oracle, SQL server, MySQL, SQlite
+    1.2 非关系型数据库： Not Only SQL, 强调key-value的方式存储数据, Mongodb, redis
+2.MySQL使用场景
+3.Navicat安装及使用
+4.MySQL和CRUD的操作使用
+5.python交互MySQL
+6.实际案例，订单系统
+
+关系型数据库的使用场景：
+1.web网站系统
+2.日志记录系统
+3.数据仓库系统
+4.嵌入式系统
+
+MYSQL：关系型数据库管理软件
+    1. 关系型数据库服务端软件 -server
+    2. 关系型数据库客户端软件 -client
+
+SQL: structured query language 结构化查询语言
+    1.1 DQL 数据查询语言 select
+    1.2 DML 数据操作语言 insert, update, delete
+    1.3 DDL 数据定义语言 create, drop
+    1.4 TPL 事务处理语言 begin transaction, commit, rollback
+    1.5 DCL 数据控制语言 grant, revoke
+
+MySQL数据类型:
+int,bit             整型(bit: 0,1)
+decimal             小数
+varchar,char        字符串
+date,time,datetime  日期时间
+enum                枚举
+
+MySQL字段约束：
+primay key      主键约束
+not null        非空约束
+unique          唯一约束
+default         默认约束
+
+
+Ubuntu环境安装MySQL:
+1. sudo apt-get install mysql-server
+2. sudo apt-get install mysql-client
+启动MySQL:
+1. sudo service mysql start
+2. mysql -uroot -p
+3. 输入密码
+查看ySQL：
+sudo service mysql status
+重启ySQL：
+sudo service mysql restart
+
+
+Windows环境启动/停止MySQL(windows环境mysql默认跟随系统启动而启动)：
+1. net start mysql
+2. net stop mysql
+
+
+Windows环境通过cmd命令登录MySQL:
+mysql -uroot -p
+
+
+Windows环境通过MySQL Command Line Client登录MySQL：
+启动后直接输入root密码
+
+
+Windows环境(虚拟机)MySQL允许远程访问：
+1. 通过MySQL Command Line Client登录MySQL
+2. use 某个database;
+3. 输入：GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY '你设置的密码' WITH GRANT OPTION;
+4. 使用navicat连接
+
+
+Windows环境终端数据库指令
+1.查看所有数据库：  show databases;
+2.创建数据库：    create database 数据库名 charset=utf8;
+3.使用数据库：    use 数据库名;
+4.查看当前使用的数据库： select database();
+5.删除数据库：    drop database 数据库名;
+
+数据库表操作：
+1.查看当前库中的所有表： show tables;
+2.创建表：  create table 表名 （字段名称 数据类型 可选的约束条件， column1 datatype contrai, ...）;
+3.修改表字段类型：  alter table 表名 modify 列名 类型 约束;
+4.删除表：  drop table 表名；
+5.查看表结构:    desc 表名；
+
+创建数据库表：
+ create table test_info(
+    -> id int unsigned primary key not null auto_increment,
+    -> name char(10) not null,
+    -> age int
+    -> );
+
+ create table orders(
+    -> id int not null auto_increment primary key,
+    -> count int not null,
+    -> price decimal(10,2) not null,
+    -> freight decimal(10,2) not null,
+    -> user varchar(50) not null,
+    -> status enum('待支付','待发货','待收货') default '待支付' not null,
+    -> time date not null);
+
+修改数据库表，修改表的字段类型：
+alter table test_info modify name varchar(200) not null;
+
+CRUD操作：
+1.查询数据
+select * from 表名；
+select 列1, 列2, ... from 表名；
+2.增加数据
+2.1全列插入，值的顺序必须和字段顺序一致
+insert into 表名 values();
+示范：insert into person_info values(4, 'Sam', 20,'男', 'LA', '1993-07-25 11:04:01');
+2.2部分列插入，值得顺序和给出的列的顺序对应
+insert into 表名(列1...) values(值1...);
+2.3全列多行插入
+insert into 表名 values (...),(...),(...);
+2.4部分列多行插入
+insert into 表名(列1...) values(值1...),(值1...),(值1...);
+示范： insert into person_info(id, name, age, gender) values(0, "Bob", 30, "男"),(0, "Mary", 27, "女");
+3.修改数据
+update 表名 set 列1=值1, 列2=值2... where  条件；
+示范： update person_info set name="Tomy" where name="Tom";
+4.删除数据
+delete from 表名 where 条件;
+
+
+MySQL数据的备份导出:
+备份导出到文件(不写表名字表示备份当前数据库下的所有表)： mysqldump -u用户名 -p密码 数据库名字 表名字 > data.sql
+MySQL导入恢复:
+cd 到数据文件路径下
+mysql -u用户名 -p密码
+use 数据库
+source data.sql
+
+
+pymysql
+1.导包
+import pymysal
+2.创建和mysql服务器的连接对象
+pymysql.connect(参数列表)
+3.获取游标对象
+cursor = conn.cursor()
+4.使用游标对象执行sql语句
+row_count = cursor.execute(sql语句)
+5.获取查询结果集
+result = cursor.fetchall()
+6.增加和修改操作提交到数据库
+conn.commit()
+7.回滚数据
+conn.rollback()
+8.关闭游标对象
+cursor.close()
+9.关闭连接
+conn.close()
