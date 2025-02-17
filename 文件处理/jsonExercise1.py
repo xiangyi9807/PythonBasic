@@ -1,7 +1,7 @@
 # -*- coding:utf-8 -*-
 # xy
 
-#
+# 写回文件的内容有中文时需要加上： ensure_ascii=False
 
 
 import json
