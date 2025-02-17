@@ -1,0 +1,26 @@
+{
+    "shoppingList": [
+        {
+            "item": "苹果",
+            "quantity": 5,
+            "unit": "个"
+        },
+        {
+            "item": "牛奶",
+            "quantity": 2,
+            "unit": "瓶"
+        },
+        {
+            "item": "面包",
+            "quantity": 1,
+            "unit": "个"
+        },
+        {
+            "item": "鸡蛋",
+            "quantity": 10,
+            "unit": "个"
+        }
+    ],
+    "date": "2023-10-05",
+    "location": "超市A"
+}
